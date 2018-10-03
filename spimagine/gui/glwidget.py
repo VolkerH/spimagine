@@ -609,6 +609,7 @@ class GLWidget(QtOpenGL.QGLWidget):
 
             self.renderer.set_max_val(self.transform.maxVal)
             self.renderer.set_gamma(self.transform.gamma)
+            self.renderer.set_skew(self.transform.skew)
             self.renderer.set_alpha_pow(self.transform.alphaPow)
 
             self.renderer.set_occ_strength(self.transform.occ_strength)

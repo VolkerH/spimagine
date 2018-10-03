@@ -25,6 +25,7 @@ class TransformModel(QtCore.QObject):
     _minChanged = QtCore.pyqtSignal(float)
 
     _gammaChanged = QtCore.pyqtSignal(float)
+    _skewChanged = QtCore.pyqtSignal(float)
     _boxChanged = QtCore.pyqtSignal(int)
 
     _isoChanged = QtCore.pyqtSignal(bool)
@@ -84,6 +85,7 @@ class TransformModel(QtCore.QObject):
         self.setPerspective()
         self.setValueScale(minVal, maxVal)
         self.setGamma(1.)
+        self.setSkew(0.0)
         self.setAlphaPow(0)
         self.setBox(True)
         self.setInterpolate(True)
@@ -186,6 +188,14 @@ class TransformModel(QtCore.QObject):
         self.gamma = gamma
         self._gammaChanged.emit(self.gamma)
         self._transformChanged.emit()
+
+    # Added by Volker for interactive skew
+    def setSkew(self, skew):
+        logger.debug("setSkew(%s)", skew)
+        #print("Setting skew ...", skew)
+        self.skew = skew
+        self._skewChanged.emit(self.skew)
+        self._transformChanged.emit()  
 
     def setAlphaPow(self, alphaPow):
         logger.debug("setAlphaPow(%s)", alphaPow)

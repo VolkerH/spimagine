@@ -119,6 +119,7 @@ class VolumeRenderer:
 
         self.set_dtype()
         self.set_gamma()
+        self.set_skew()
         self.set_max_val()
         self.set_min_val()
 
@@ -219,6 +220,9 @@ class VolumeRenderer:
 
     def set_gamma(self, gamma=1.):
         self.gamma = gamma
+
+    def set_skew(self, skew=0.0):
+        self.skew = skew
 
     def set_occ_strength(self, occ=.2):
         self.occ_strength = occ
@@ -322,7 +326,9 @@ class VolumeRenderer:
 
         # mScale =  scaleMat(1.,1.*dx*Nx/dy/Ny,1.*dx*Nx/dz/Nz)
         maxDim = max(d*N for d, N in zip([dx, dy, dz], [Nx, Ny, Nz]))
-        return mat4_scale(1.*dx*Nx/maxDim, 1.*dy*Ny/maxDim, 1.*dz*Nz/maxDim)
+        # Volker test
+        
+        return mat4_scale(1.*dx*Nx/maxDim, 1.*dy*Ny/maxDim, 1.*dz*Nz/maxDim, self.skew)
 
     def _render_max_project(self, dtype=np.float32, numParts=1, currentPart=0):
         if dtype in [np.uint16, np.uint8]:
@@ -506,7 +512,7 @@ class VolumeRenderer:
         self.output_occlusion = self.buf_occlusion.get()
 
     def render(self, data=None, stackUnits=None,
-               minVal=None, maxVal=None, gamma=None,
+               minVal=None, maxVal=None, gamma=None, skew=None,
                modelView=None, projection=None,
                boxBounds=None, return_alpha=False, method="max_project",
                numParts=1, currentPart=0):
@@ -523,6 +529,9 @@ class VolumeRenderer:
         if gamma is not None:
             self.set_gamma(gamma)
 
+        if skew is not None:
+            self.set_skew(skew)
+  
         if stackUnits is not None:
             self.set_units(stackUnits)
 

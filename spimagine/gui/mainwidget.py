@@ -219,7 +219,7 @@ class MainWidget(QtWidgets.QWidget):
 
         self.skewSlider.setToolTip("skew")
         self.skewSlider.setFocusPolicy(QtCore.Qt.ClickFocus)
-        self.skewSlider.setValue(.0)
+        self.skewSlider.setValue(0.0)
 
         # def func_from_n(n):
         #     return 2**(self.N_SCALE_MIN_EXP+(self.N_SCALE_MAX_EXP-self.N_SCALE_MIN_EXP)*(n-1.)/(self.N_SCALE_SLIDER-1))
@@ -257,6 +257,11 @@ class MainWidget(QtWidgets.QWidget):
 
         self.gammaSlider.floatValueChanged.connect(self.transform.setGamma)
         self.transform._gammaChanged.connect(self.gammaSlider.setValue)
+
+        # Volker's additions for interactive skew.
+        self.skewSlider.floatValueChanged.connect(self.transform.setSkew)
+        self.transform._skewChanged.connect(self.skewSlider.setValue)
+    
 
         # self.keyframes = KeyFrameList()
         self.keyPanel = KeyFramePanel(self.glWidget)
