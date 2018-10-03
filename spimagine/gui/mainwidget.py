@@ -214,6 +214,13 @@ class MainWidget(QtWidgets.QWidget):
         self.gammaSlider.setValue(1.)
 
 
+        self.skewSlider = FloatSlider(QtCore.Qt.Vertical)
+        self.skewSlider.setRange(.0,1.0,200)
+
+        self.skewSlider.setToolTip("skew")
+        self.skewSlider.setFocusPolicy(QtCore.Qt.ClickFocus)
+        self.skewSlider.setValue(.0)
+
         # def func_from_n(n):
         #     return 2**(self.N_SCALE_MIN_EXP+(self.N_SCALE_MAX_EXP-self.N_SCALE_MIN_EXP)*(n-1.)/(self.N_SCALE_SLIDER-1))
 
@@ -279,6 +286,8 @@ class MainWidget(QtWidgets.QWidget):
 
         hbox0.addWidget(self.maxSlider)
         hbox0.addWidget(self.gammaSlider)
+
+        hbox0.addWidget(self.skewSlider)
 
         hbox0.addWidget(self.glWidget,stretch = 3)
 

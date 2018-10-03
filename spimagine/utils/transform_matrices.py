@@ -19,7 +19,7 @@ from spimagine.utils.quaternion import Quaternion
 
 
 def mat4_scale(x=1., y=1., z=1.):
-    return np.array([x, 0.0, 0.0, 0.,
+    return np.array([x, 0.4, 0.0, 0.,
                      0.0, y, 0.0, 0.0,
                      0.0, 0.0, z, 0.0,
                      0, 0, 0, 1.0],np.float32).reshape(4, 4)
