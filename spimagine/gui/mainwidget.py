@@ -215,7 +215,7 @@ class MainWidget(QtWidgets.QWidget):
 
 
         self.skewSlider = FloatSlider(QtCore.Qt.Vertical)
-        self.skewSlider.setRange(.0,1.0,200)
+        self.skewSlider.setRange(-1.0,1.0,360)
 
         self.skewSlider.setToolTip("skew")
         self.skewSlider.setFocusPolicy(QtCore.Qt.ClickFocus)
